@@ -1,0 +1,44 @@
+\defineblock[singlepages]
+\hideblocks[singlepages]
+
+\beginsinglepages[frontCover]
+\startmakeup[frontCover]
+  \externalfigure[图片1.png]
+  \hfill
+  \bTABLE
+  \setupTABLE[frame=off,style=tblfont]
+  \setupTABLE[column][1][align=flushright]
+  \bTR\bTD 受控状态 \eTD\bTD ： \eTD\bTD \eTD\eTR
+  \bTR\bTD 文档编号 \eTD\bTD ： \eTD\bTD \getvariable{documentproperty}{docnumber}\eTD\eTR
+  \bTR\bTD 文档版本 \eTD\bTD ： \eTD\bTD \getvariable{documentproperty}{docversion}\eTD\eTR
+  \eTABLE
+
+  \vfill
+  \vfill
+  \startalignment[middle]
+    \booktitle\getvariable{documentproperty}{title}
+
+    \booksubtitle\getvariable{documentproperty}{subtitle}
+  \stopalignment
+
+  \vfill
+  \startalignment[middle]
+  \bTABLE
+  \setupTABLE[frame=off,style=tblfontVerybig,toffset=2em]
+  \setupTABLE[column][1][align=flushright]
+  \setupTABLE[column][3][bottomframe=on,width=12em]
+  \bTR\bTD 编制 \eTD\bTD ： \eTD\bTD \eTD\eTR
+  \bTR\bTD 审核 \eTD\bTD ： \eTD\bTD \eTD\eTR
+  \bTR\bTD 批准 \eTD\bTD ： \eTD\bTD \eTD\eTR
+  \bTR\bTD 生效日期 \eTD\bTD ： \eTD\bTD \eTD\eTR
+  \eTABLE
+  \stopalignment
+
+  \vfill
+  \startalignment[middle]
+    \getvariable{documentproperty}{companycn}
+
+    \getvariable{documentproperty}{companyen}
+  \stopalignment
+\stopmakeup
+\endsinglepages

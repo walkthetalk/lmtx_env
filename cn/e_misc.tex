@@ -1,0 +1,99 @@
+\setupexternalfigures[%
+  %order={pdf,png,jpg},
+  location={local,global},
+  %directory={../output,./output}
+]
+
+\setupmargindata[%
+  %location %flushleft flushright both
+  style={\rm\itx},	%normal bold slanted boldslanted type cap small... command
+  %before	%command
+  %after	%command
+  align=left,	%inner outer left right middle normal no yes
+  %line	number
+  %distance	dimension
+  %separator	text
+  %width	dimension
+  %distance	dimension
+  %stack	yes no
+  %see \setupframed
+]
+
+\setupfootnotes[
+  %conversion=set 2,	%numbers characters Characters romannumerals Romannumerals
+  %way=bytext,	%bytext bysection
+  %location=high,	%page text columns firstcolumn lastcolumn high none
+  %background=color,
+  %backgroundcolor=red,
+  %rule	on off
+  %before=,	%command
+  %after	command
+  %width	dimension
+  %height	dimension
+  %bodyfont	5pt ... 12pt small big
+  %style=bold,	%normal bold slanted boldslanted type cap small... command
+  distance=2ex,	%dimension
+  %columndistance	dimension
+  %margindistance	dimension
+  %n=3,		%number
+  %numbercommand=\high,	%oneargument 脚注编号的位置
+  %textcommand=,	%oneargument
+  %split	tolerant strict verystrict number
+  %textstyle	normal bold slanted boldslanted type cap small... command
+  %textcolor=red,	%name
+  %interaction=yes,	%yes no
+  %factor	number
+]
+
+% chinese date
+\startluacode
+local function tochineseYear(n)
+	local cap = {
+		["0"] = "零",
+		["1"] = "壹",
+		["2"] = "贰",
+		["3"] = "叁",
+		["4"] = "肆",
+		["5"] = "伍",
+		["6"] = "陆",
+		["7"] = "柒",
+		["8"] = "捌",
+		["9"] = "玖",
+	}
+
+	s, p = string.gsub(string.format("%d",n), "(.)", function(s) return cap[s] end)
+	return s
+end
+
+function commands.chinese_date() -- wrong namespace
+	local temp = os.date("*t")
+	local day = temp.day
+
+	tex.sprint(tex.ctxcatcodes,tochineseYear(temp.year))
+	tex.sprint(tex.ctxcatcodes,"年")
+	tex.sprint(tex.ctxcatcodes, converters.chinesecapnumerals(temp.month))
+	tex.sprint(tex.ctxcatcodes,"月")
+
+	if day % 10 == 0 then
+		converters.chinesecapnumerals(day)
+	else
+		if day > 30 then
+			tex.sprint(tex.ctxcatcodes,"卅")
+		elseif day > 20 then
+			tex.sprint(tex.ctxcatcodes,"廿")
+		elseif day > 10 then
+			tex.sprint(tex.ctxcatcodes,"拾")
+		end
+		day = day % 10
+		if day > 0 then
+			tex.sprint(tex.ctxcatcodes, converters.chinesecapnumerals(day))
+		end
+	end
+	tex.sprint(tex.ctxcatcodes,"日")
+end
+\stopluacode
+
+\define\COMPILEDATE{%
+\ctxlua{commands.chinese_date()}%
+}
+%\setuplanguage[cn][date={year,年,month,月,day,日}]

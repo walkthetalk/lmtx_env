@@ -1,0 +1,34 @@
+% 必须先设置state=start，否则书签为空
+\setupinteraction[
+  state=start,
+  color=blue,
+  contrastcolor=blue,
+  style=bold,
+  title={\getvariable{documentproperty}{title}},
+  author={\getvariable{documentproperty}{author}},
+  subtitle={\getvariable{documentproperty}{subtitle}},
+  keyword={\getvariable{documentproperty}{keyword}},
+]
+
+% BUG: can't put 'part' in pdf index, or the chapter/section... missed
+\placebookmarks[
+  chapter,section,subsection% put these in the pdf index
+][
+  chapter,section
+][
+  %number=no% 如果你不想看到编号
+]
+
+% 强制将无编号head添加为标签
+\placebookmarks[
+  title,subject,subsubject%
+][
+  force=yes%
+]
+
+\setupinteractionscreen[
+  option=bookmark% 缺省打开书签窗口
+]
+
+% 如果书签中含有TEX指令，展开
+\enabledirectives[references.bookmarks.preroll]

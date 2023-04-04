@@ -1,0 +1,145 @@
+
+% 字号对应表
+\definemeasure[fs0][42pt]	% 初号
+\definemeasure[fs0s][36pt]	% 小初
+\definemeasure[fs1][26pt]	% 一号
+\definemeasure[fs1s][24pt]	% 小一
+\definemeasure[fs2][22pt]	% 二号
+\definemeasure[fs2s][18pt]	% 小二
+\definemeasure[fs3][16pt]	% 三号
+\definemeasure[fs3s][15pt]	% 小三
+\definemeasure[fs4][14pt]	% 四号
+\definemeasure[fs4s][12pt]	% 小四
+\definemeasure[fs5][10.5pt]	% 五号
+\definemeasure[fs5s][9pt]	% 小五
+\definemeasure[fs6][7.5pt]	% 六号
+\definemeasure[fs6s][6.5pt]	% 小六
+\definemeasure[fs7][5.5pt]	% 七号
+\definemeasure[fs8][5pt]	% 八号
+
+\definebodyfontenvironment [9pt] [
+	xx=6.5pt,x=7.5pt,text=9pt,a=10.5pt,b=12pt,c=14pt,d=15pt,
+	scriptscript=5.5pt,script=7.5pt,small=7.5pt,big=10.5pt
+]
+\definebodyfontenvironment [10.5pt] [
+	xx=7.5pt,x=9pt,text=10.5pt,a=12pt,b=14pt,c=15pt,d=16pt,
+	scriptscript=7.5pt,script=9pt,small=9pt,big=12pt
+]
+\definebodyfontenvironment [12pt] [
+	xx=9pt,x=10.5pt,text=12pt,a=14pt,b=15pt,c=16pt,d=18pt,
+	scriptscript=9pt,script=10.5pt,small=10.5pt,big=14pt
+]
+\definebodyfontenvironment [14pt] [
+	xx=10.5pt,x=12pt,text=14pt,a=15pt,b=16pt,c=18pt,d=22pt,
+	scriptscript=9pt,script=12pt,small=12pt,big=15pt
+]
+\definebodyfontenvironment [15pt] [
+	xx=12pt,x=14pt,text=15pt,a=16pt,b=18pt,c=22pt,d=24pt,
+	scriptscript=9pt,script=12pt,small=12pt,big=18pt
+]
+\definebodyfontenvironment [16pt] [
+	xx=14pt,x=15pt,text=16pt,a=18pt,b=22pt,c=24pt,d=26pt,
+	scriptscript=10.5pt,script=14pt,small=14pt,big=18pt
+]
+\definebodyfontenvironment [18pt] [
+	xx=15pt,x=16pt,text=18pt,a=22pt,b=24pt,c=26pt,d=36pt,
+	scriptscript=10.5pt,script=12pt,small=14pt,big=22pt
+]
+\definebodyfontenvironment [22pt] [
+	xx=16pt,x=18pt,text=22pt,a=24pt,b=26pt,c=36pt,d=42pt,
+	scriptscript=12pt,script=16pt,small=18pt,big=24pt
+]
+
+% zhfonts
+\usemodule[t][zhfonts][style=rm, size=\measure{fs4}]
+%\setupzhfonts[feature][onum=yes, pnum=yes]
+
+% note: 中文部分以noto-cjk爲基礎，斜體用Adobe的中文字體，粗斜體全部用Adobe的黑體
+\setupzhfonts
+[serif]
+[regular=notoserifcjksc,%adobesongstd,
+bold=notoserifcjkscbold,%adobeheitistd,
+italic=adobesongstd,
+bolditalic=adobeheitistd]
+
+\setupzhfonts
+[sans]
+[regular=notosanscjksc,%adobefangsongstd,
+bold=notosanscjkscblack,%adobeheitistd,
+italic=adobefangsongstd,
+bolditalic=adobeheitistd]
+
+\setupzhfonts
+[mono]
+[regular=notosansmonocjksc,%adobekaitistd,
+bold=notosansmonocjkscbold,%adobeheitistd,
+italic=adobekaitistd,
+bolditalic=adobeheitistd]
+
+\setupzhfonts
+[latin, serif]
+[regular=notoserifregular,%texgyrepagellaregular,
+bold=notoserifbold,%texgyrepagellabold,
+italic=notoserifitalic,%texgyrepagellaitalic,
+bolditalic=notoserifbolditalic%texgyrepagellabolditalic
+]
+
+% todo: noto的mono沒有斜體，暫用adobe的source-code代替
+\setupzhfonts
+[latin, mono][
+  regular=notosansmonoregular,%texgyrecursorregular,
+  bold=notosansmonobold,%texgyrecursorbold,
+  italic=sourcecodeproitalic,
+  bolditalic=sourcecodeprobolditalic
+]
+
+\setupzhfonts
+[latin, sans]
+[regular=notosansregular,%texgyreherosregular,
+bold=notosansbold,%texgyreherosbold,
+italic=notosansitalic,%texgyreherositalic,
+bolditalic=notosansbolditalic%texgyreherosbolditalic
+]
+
+% math
+%\usetypescriptfile[euler]
+%\setupzhfonts[math][pagellaovereuler]
+
+\zhfonts[rm,\measure{fs4}]
+% %D 预先设置文档主字体类型与尺寸，防止 ConTexT 将 12pt 作为 1em 的绝对长度
+\setupbodyfont[zhfonts, rm, \measure{fs4}]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% zhpunc %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usemodule[zhpunc][pattern=kaiming, spacequad=0.5, hangjian=false]
+
+\definebodyfontenvironment[default][em=bolditalic]
+
+\definealternativestyle[booktitle][{\switchtobodyfont[\measure{fs0}]\ss}][]
+\definealternativestyle[booksubtitle][{\switchtobodyfont[\measure{fs1}]\ss}][]
+
+\definealternativestyle[tblfontSmall][\ssx][]
+\definealternativestyle[tblfont][\ss][]
+\definealternativestyle[tblfontBig][\ssa][]
+\definealternativestyle[tblfontVerybig][\ssb][]
+
+\definealternativestyle[floatlabeltext][\rmx][]
+\definealternativestyle[floatlabelhead][\bf][]
+
+\definealternativestyle[headertext][\ss\tfx][]
+\definealternativestyle[footertext][\ss\tfx][]
+
+\definealternativestyle[titletext][\rm\bfb][]
+\definealternativestyle[parttext][\rm\bfd][]
+\definealternativestyle[chaptertext][\rm\bfc][]
+\definealternativestyle[sectiontext][\rm\bfb][]
+\definealternativestyle[subsectiontext][\rm\bfa][]
+\definealternativestyle[subsubsectiontext][\rm\ita][]
+
+\definealternativestyle[labelinmargin][\rm\tfb][]
+
+\setuptolerance[horizontal,
+  verystrict, %stretch space verystrict strict tolerant verytolerant
+]
+\setuptolerance[vertical,
+  strict, %stretch space verystrict strict tolerant verytolerant
+]

@@ -1,0 +1,27 @@
+\setupinteraction[state=start] % don't forget this line!
+% make chapter, section bookmarks visible when opening document
+\placebookmarks[chapter,section,subsection][chapter,section]
+\setupinteractionscreen[option=bookmark]
+% expand macros in bookmarks
+\enabledirectives[references.bookmarks.preroll]
+\starttext
+\startchapter[title=The beginning]
+Hi!
+\stopchapter
+\startchapter[title={A very, very\\long title}]
+Greetings!
+\startsection[title=Why so long]
+I don't know
+\startsubsection[title=Why not?]
+Good point.
+\stopsubsection
+\stopsection
+\stopchapter
+\startchapter[title=The never-ending story]
+Oh no.
+\stopchapter
+\startchapter[title=The never-ending story,
+                    bookmark=Forever!]
+Oh no.
+\stopchapter
+\stoptext
