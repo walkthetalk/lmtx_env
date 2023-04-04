@@ -1,4 +1,6 @@
-# Context 相關文檔：https://tex.stackexchange.com/questions/448812/the-definitive-guide-to-context-mkiv-and-lmtx-documentation
+# luametatex 相關設定
+* 集成了 liyanrui 的 [zhfonts](https://github.com/liyanrui/zhfonts)
+# ConText 相關文檔：https://tex.stackexchange.com/questions/448812/the-definitive-guide-to-context-mkiv-and-lmtx-documentation
 # 字體依賴：
 * noto-fonts
 * noto-fonts-cjk
