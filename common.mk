@@ -31,7 +31,8 @@ ifeq ("${MTXRUN_BIN}", "")
 MTXRUN_BIN:=/usr/local/bin/mtxrun
 endif
 
-__dir_output := ${dir_main}/output
+output_dir := ${dir_main}/output
+main_object := ${output_dir}/${pdf_name}.pdf
 
 __dir_env := $(dir $(lastword $(MAKEFILE_LIST)))
 __dir_cn_env := ${__dir_env}/cn
@@ -64,17 +65,17 @@ __tex_deps+=$(shell find ${dir_main} \
 __arguments := 
 
 .PHONY: all
-all: ${__dir_output}/${pdf_name}.pdf
+all: ${main_object}
 
 .PHONY: clean
 clean:
-	@rm -rf ${__dir_output}/*
+	@rm -rf ${output_dir}/*
 
-${__dir_output}/${pdf_name}.pdf: $(__tex_deps) | ${__dir_output}/
+${main_object}: $(__tex_deps) | ${output_dir}/
 	echo [gen] $@; \
 	export TEXMF=${LMTX_DIR}; \
 	export OSFONTDIR=${FONT_DIR}; \
-	cd ${__dir_output}; \
+	cd ${output_dir}; \
 	${CONTEXT_BIN} \
 		--nocompression \
 		--environment=env_${doc_env} \
@@ -93,5 +94,5 @@ generate:
 	${MTXRUN_BIN} --script font --reload --force; \
 	${MTXRUN_BIN} --script font --list --all
 
-${__dir_output}/:
+${output_dir}/:
 	@mkdir -p $@
