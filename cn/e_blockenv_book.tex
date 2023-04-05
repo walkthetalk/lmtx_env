@@ -53,8 +53,9 @@
 \define\BodyTextLeftHeader{%
 % @note location=low 保证坐在第一行上
 \framedtext[frame=off,bottomframe=on,width=broad,offset=none,frameoffset=0pt,location=low]{%
-  \doiftextelse{\getmarking[section][current]}
-  {第\;\getmarking[chapternumber][first]\;章\;\;\getmarking[chapter][first]}
+  \doiftextelse{\getmarking[section][current]}%
+  {第\;\getmarking[chapternumber][first]\;章\;\;\getmarking[chapter][first]}%
+  {}
   \hfill
 }%
 }
@@ -64,8 +65,9 @@
 % @note location=low 保证坐在第一行上
 \framedtext[frame=off,bottomframe=on,width=broad,offset=none,frameoffset=0pt,location=low]{%
   \hfill
-  \doiftextelse{\getmarking[section][current]}
-  {节\;\getmarking[sectionnumber][first]\;\;\getmarking[section][first]}
+    \doiftextelse{\getmarking[section][current]}%
+    {节\;\getmarking[sectionnumber][first]\;\;\getmarking[section][first]}%
+    {}%
 }%
 }
 % @note 保证header底部对齐

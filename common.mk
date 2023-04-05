@@ -22,13 +22,20 @@ ifeq ("${LMTX_DIR}", "")
 LMTX_DIR:=/usr/share/texmf-dist/texmf-context
 endif
 ifeq ("${FONT_DIR}", "")
-FONT_DIR+=/usr/share/fonts/noto-cjk:/usr/share/fonts/noto:/usr/share/fonts/Adobe:/usr/share/fonts/adobe-source-code-pro
+FONT_DIR_NOTO:=/usr/share/fonts/noto-cjk:/usr/share/fonts/noto
+FONT_DIR_ADOBE:=/usr/share/fonts/Adobe:/usr/share/fonts/adobe-source-code-pro
+FONT_DIR_TEXLIVE:=/usr/share/texmf-dist/fonts
+FONT_DIR:="${FONT_DIR_NOTO}:${FONT_DIR_ADOBE}:${FONT_DIR_TEXLIVE}"
+#$(error FONT_DIR is "${FONT_DIR}")
 endif
 ifeq ("${CONTEXT_BIN}", "")
 CONTEXT_BIN:=/usr/local/bin/context
 endif
 ifeq ("${MTXRUN_BIN}", "")
 MTXRUN_BIN:=/usr/local/bin/mtxrun
+endif
+ifeq ("${EXTRA_PATH}", "")
+EXTRA_PATH:=
 endif
 
 output_dir := ${dir_main}/output
@@ -52,6 +59,9 @@ __dir_zh_modules := ${__dir_zhfonts-liyanrui}
 __dir_figs := ${dir_main}/figs
 
 __paths_cn_env := ${__dir_zh_modules},${__dir_cn_env},${__dirs_metapost_modules},${__dir_figs}
+ifneq ("${EXTRA_PATH}", "")
+__paths_cn_env :=${__paths_cn_env},${EXTRA_PATH}
+endif
 __paths_en_env := ${__dir_en_env}
 
 __tex_deps:=$(shell find ${__dir_env} \
@@ -79,7 +89,7 @@ ${main_object}: $(__tex_deps) | ${output_dir}/
 	${CONTEXT_BIN} \
 		--nocompression \
 		--environment=env_${doc_env} \
-		--path=${__paths_cn_env} \
+		--path=${dir_main},${},${__paths_cn_env} \
 		--result=${pdf_name}.pdf \
 		--arguments=${__arguments} \
 		${tex_path}
