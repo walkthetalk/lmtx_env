@@ -17,6 +17,7 @@
 \definemeasure[fs7][5.5pt]	% 七号
 \definemeasure[fs8][5pt]	% 八号
 
+% @note 這些設定貌似不起作用
 \definebodyfontenvironment [9pt] [
 	xx=6.5pt,x=7.5pt,text=9pt,a=10.5pt,b=12pt,c=14pt,d=15pt,
 	scriptscript=5.5pt,script=7.5pt,small=7.5pt,big=10.5pt
@@ -51,7 +52,9 @@
 ]
 
 % zhfonts
-\usemodule[t][zhfonts][style=rm, size=\measure{fs4}]
+% @todo 必須設置成ConTeXt自帶的字體大小，否則TABLE/TH中的數學環境無法使用上下標
+%       https://github.com/contextgarden/luametatex/issues/4
+\usemodule[t][zhfonts][style=rm, size=\measure{fs4s}]
 %\setupzhfonts[feature][onum=yes, pnum=yes]
 
 % note: 中文部分以noto-cjk爲基礎，斜體用Adobe的中文字體，粗斜體全部用Adobe的黑體
@@ -105,9 +108,10 @@ bolditalic=notosansbolditalic%texgyreherosbolditalic
 %\usetypescriptfile[euler]
 %\setupzhfonts[math][pagellaovereuler]
 
-\zhfonts[rm,\measure{fs4}]
+% @todo: zhfonts會修改所有starttext，暫時保留此行爲，如果後續有更改，則需在此設置
+%\zhfonts[rm,\measure{fs4s}]
 % %D 预先设置文档主字体类型与尺寸，防止 ConTexT 将 12pt 作为 1em 的绝对长度
-\setupbodyfont[zhfonts, rm, \measure{fs4}]
+%\setupbodyfont[zhfonts, rm, \measure{fs4s}]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% zhpunc %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\usemodule[zhpunc][pattern=kaiming, spacequad=0.5, hangjian=false]
