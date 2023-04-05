@@ -1,0 +1,19 @@
+%https://github.com/contextgarden/luametatex/issues/5
+
+% 設置頁面及列環境後無法正確斷行
+
+\definepapersize[landscapePage][A4,landscape]
+
+\starttext
+\page
+\adaptpapersize[landscapePage]
+something.
+\page
+
+\startcolumns[n=3,blank=small,distance=2em,balance=yes]
+\stopcolumns
+
+some word, some word, some word, some word, some word, some word,
+some word, some word, some word, some word, some word, some word,
+
+\stoptext
