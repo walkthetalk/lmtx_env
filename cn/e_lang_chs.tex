@@ -1,0 +1,61 @@
+% 中文配置
+\mainlanguage[chs]
+\language[chs]
+\setscript[hanzi] % 汉字脚本（断行）
+\setupalign[hanging,hz] %行末标点悬挂
+
+% 首行缩进
+\setupindenting[first,always,2em]
+% 段落间距
+\setupwhitespace[small] %none small medium big line fixed fix dimension
+% 行间距
+\setupinterlinespace[medium]
+%\setupinterlinespace[big, on][line=3ex]
+%\setuprelativeinterlinespace[1.2]
+% setupalign 必須位於setupbodyfont之前，因此修改了zhfonts模塊
+%\setupalign[flushleft,nothyphenated,broad]
+%width left right middle inner outer wide broad height bottom line reset hanging
+%nothanging hyphenated nothyphenated lesshyphenation morehyphenation new old normal yes
+%no flushleft flushright flushouter flushinner center hz nohz spacing nospacing tolerant
+%verytolerant stretch
+
+% @note 用于setuphead[]
+\setuplabeltext[chs][
+  figure={图\;,},
+  table={表\;,},
+  frontpart={第\;,\;卷},
+  bodypart={第\;,\;卷},
+  appendpart={第\;,\;卷},
+  backpart={第\;,\;卷},
+  frontchapter={第\;,\;章},
+  bodychapter={第\;,\;章},
+  appendchapter={附录\;,},
+  backchapter={第\;,\;章},
+  frontsection={节\;,},
+  bodysection={节\;,},
+  appendsection={,},
+  backsection={节\;,},% @note 必须有分号
+]
+
+% headtext作为title显示
+\setupheadtext[chs][
+  content={目录},
+  figures={图},
+  tables={表},
+  pubs={参考文献}
+]
+
+% @note 日期
+\ctxloadluafile{lang-chs}
+\defineconversion[ChsYear][\ChsYear]
+\defineconversion[ChsMonth][\ChsMonth]
+\defineconversion[ChsDay][\ChsDay]
+\setuplanguage[chs][date={year:ChsYear,month:ChsMonth,day:ChsDay}]
+
+\defineIn[chapter][left=第,right=章]
+\defineIn[appendix][left=附录,right=]
+\defineIn[appendixsec][left=附录,right=]
+\defineIn[section][left=节,right=]
+\defineIn[item][left=第,right=项]
+\defineIn[fig][left=图,right=]
+\defineIn[tab][left=表,right=]

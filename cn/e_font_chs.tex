@@ -1,0 +1,64 @@
+% zhfonts
+% @todo 必須設置成ConTeXt自帶的字體大小，否則TABLE/TH中的數學環境無法使用上下標
+%       https://github.com/contextgarden/luametatex/issues/4
+\usemodule[t][zhfonts][style=rm, size=\measure{fs4s}]
+%\setupzhfonts[feature][onum=yes, pnum=yes]
+
+% note: 中文部分以noto-cjk爲基礎，斜體用Adobe的中文字體，粗斜體全部用Adobe的黑體
+\setupzhfonts
+[serif]
+[regular=notoserifcjksc,%adobesongstd,
+bold=notoserifcjkscbold,%adobeheitistd,
+italic=adobesongstd,
+bolditalic=adobeheitistd]
+
+\setupzhfonts
+[sans]
+[regular=notosanscjksc,%adobefangsongstd,
+bold=notosanscjkscblack,%adobeheitistd,
+italic=adobefangsongstd,
+bolditalic=adobeheitistd]
+
+\setupzhfonts
+[mono]
+[regular=notosansmonocjksc,%adobekaitistd,
+bold=notosansmonocjkscbold,%adobeheitistd,
+italic=adobekaitistd,
+bolditalic=adobeheitistd]
+
+\setupzhfonts
+[latin, serif]
+[regular=notoserifregular,%texgyrepagellaregular,
+bold=notoserifbold,%texgyrepagellabold,
+italic=notoserifitalic,%texgyrepagellaitalic,
+bolditalic=notoserifbolditalic%texgyrepagellabolditalic
+]
+
+% todo: noto的mono沒有斜體，暫用adobe的source-code代替
+\setupzhfonts
+[latin, mono][
+  regular=notosansmonoregular,%texgyrecursorregular,
+  bold=notosansmonobold,%texgyrecursorbold,
+  italic=sourcecodeproitalic,
+  bolditalic=sourcecodeprobolditalic
+]
+
+\setupzhfonts
+[latin, sans]
+[regular=notosansregular,%texgyreherosregular,
+bold=notosansbold,%texgyreherosbold,
+italic=notosansitalic,%texgyreherositalic,
+bolditalic=notosansbolditalic%texgyreherosbolditalic
+]
+
+% math
+%\usetypescriptfile[euler]
+%\setupzhfonts[math][pagellaovereuler]
+
+% @todo: zhfonts會修改所有starttext，暫時保留此行爲，如果後續有更改，則需在此設置
+%\zhfonts[rm,\measure{fs4s}]
+% %D 预先设置文档主字体类型与尺寸，防止 ConTexT 将 12pt 作为 1em 的绝对长度
+%\setupbodyfont[zhfonts, rm, \measure{fs4s}]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% zhpunc %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usemodule[zhpunc][pattern=kaiming, spacequad=0.5, hangjian=false]

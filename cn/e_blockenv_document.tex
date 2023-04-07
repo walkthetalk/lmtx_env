@@ -63,7 +63,7 @@
     \bTR \bTD 文档编号\eTD\bTD ：\eTD\bTD \getvariable{documentproperty}{docnumber}\eTD
       \bTD[nr=2]
         \doiftextelse{\getmarking[section][current]}
-        {第\;\getmarking[chapternumber][first]\;章\;\;\getmarking[chapter][first]}
+        {\labeltexts{bodychapter}{\getmarking[chapternumber][first]}\;\;\getmarking[chapter][first]}
         {}
       \eTD \eTR
     \bTR \bTD 文档版本\eTD\bTD ：\eTD\bTD \getvariable{documentproperty}{docversion}\eTD \eTR
@@ -84,7 +84,7 @@
     \bTR
       \bTD[nr=2]
         \doiftextelse{\getmarking[section][current]}
-        {节\;\getmarking[sectionnumber][first]\;\;\getmarking[section][first]}
+        {\labeltexts{bodysection}{\getmarking[sectionnumber][first]}\;\;\getmarking[section][first]}
         {}
       \eTD
       \bTD 文档编号\eTD\bTD ：\eTD\bTD \getvariable{documentproperty}{docnumber}\eTD

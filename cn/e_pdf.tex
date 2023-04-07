@@ -1,4 +1,4 @@
-% 必须先设置state=start，否则书签为空
+% @note 必须先设置state=start，否则书签为空
 \setupinteraction[
   state=start,
   color=blue,
@@ -12,7 +12,9 @@
 
 % BUG: can't put 'part' in pdf index, or the chapter/section... missed
 \placebookmarks[
-  chapter,section,subsection% put these in the pdf index
+  part,
+  chapter,section,subsection,
+  title,subject,subsubject
 ][
   chapter,section
 ][

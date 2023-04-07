@@ -46,9 +46,6 @@
 \setuphead[sectionseparatorset=sepset]
 
 % 用來控制label
-\setuplabeltext[cn][frontpart={第\;,\;卷},bodypart={第\;,\;卷},appendpart={第\;,\;卷},backpart={第\;,\;卷}]
-\setuplabeltext[cn][frontchapter={第\;,\;章},bodychapter={第\;,\;章},appendchapter={附录\;,},backchapter={第\;,\;章}]
-\setuplabeltext[cn][frontsection={节\;,},bodysection={节\;,},appendsection={,},backsection={节\;,}]
 \setuphead[part][
   frontpartlabel=frontpart,
   bodypartlabel=bodypart,
@@ -229,10 +226,3 @@
     \stdcompletetables%
   }
 }
-
-% headtext作为title显示
-\setupheadtext[cn][
-  content={目录},
-  figures={图},
-  tables={表}
-]

@@ -1,0 +1,11 @@
+
+% 缺省的交叉引用会在前面自动添加空格
+\def\defineIn[#1][#2]{%
+\expandafter\definereferenceformat[in#1][#2]
+\expandafter\let
+  \csname stdin#1\expandafter\endcsname
+  \csname in#1\endcsname
+\expandafter\def\csname in#1\endcsname[##1]{%
+\csname stdin#1\endcsname[#1:##1]%
+}
+}
