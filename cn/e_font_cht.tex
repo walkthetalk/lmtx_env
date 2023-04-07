@@ -51,9 +51,11 @@ italic=notosansitalic,%texgyreherositalic,
 bolditalic=notosansbolditalic%texgyreherosbolditalic
 ]
 
-% math
-%\usetypescriptfile[euler]
-%\setupzhfonts[math][pagellaovereuler]
+% @todo 数学字体，目前在表头处会出错
+%\starttypescript[math][notomath]
+%  \definefontsynonym[MathRoman][name:notosansmath][features=default]
+%\stoptypescript
+%\setupzhfonts[math][notomath]
 
 % @todo: zhfonts會修改所有starttext，暫時保留此行爲，如果後續有更改，則需在此設置
 %\zhfonts[rm,\measure{fs4s}]

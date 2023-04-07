@@ -1,4 +1,3 @@
-% 中文配置
 interfaces.implement {
   name      = "ChtYear",
   public    = true,
