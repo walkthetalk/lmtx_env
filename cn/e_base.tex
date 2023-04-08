@@ -9,3 +9,13 @@
 \csname stdin#1\endcsname[#1:##1]%
 }
 }
+
+% 加載當前文件所在目錄下的文件
+\startluacode
+function commands.insamedir(url)
+  tex.sprint(status.filename:match("^(.+/).+$").."/"..url)
+end
+\stopluacode
+\define[1]\scomponent{%
+  \component \ctxlua{commands.insamedir([[#1]])}
+}
