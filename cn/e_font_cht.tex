@@ -51,11 +51,14 @@ italic=notosansitalic,%texgyreherositalic,
 bolditalic=notosansbolditalic%texgyreherosbolditalic
 ]
 
-% @todo 数学字体，目前在表头处会出错
-%\starttypescript[math][notomath]
-%  \definefontsynonym[MathRoman][name:notosansmath][features=default]
-%\stoptypescript
-%\setupzhfonts[math][notomath]
+% @note 数学字体
+\definefontfeature[notosans-math-bold][boldened]
+\starttypescript[math][notomath]
+  \definefontsynonym[MathRoman][name:notosansmath][features={math\mathsizesuffix,mathextra}]
+  % @note bold math，防止表頭加粗環境下出錯
+  \definefontsynonym[MathRomanBold][name:notosansmath][features={math\mathsizesuffix,notosans-math-bold,mathextra}]
+\stoptypescript
+\setupzhfonts[math][notomath]
 
 % @todo: zhfonts會修改所有starttext，暫時保留此行爲，如果後續有更改，則需在此設置
 %\zhfonts[rm,\measure{fs4s}]
