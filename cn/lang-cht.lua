@@ -8,7 +8,6 @@ interfaces.implement {
     s="西元"
     if n == 1 then
       s=s.."元"
-    end
     else
       if n < 0 then
         s=s.."前"
