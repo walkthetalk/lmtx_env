@@ -19,3 +19,20 @@ end
 \define[1]\scomponent{%
   \component[\ctxlua{commands.insamedir([[#1]])}]
 }
+
+\define[2]\scomponents{%
+  \dostepwiserecurse{1}{#2}{+1}
+  {\scomponent{#1/\recurselevel}}
+}
+
+\def\sectioncomponents[#1]#2#3{%
+\startsection[#1]
+\scomponents{#2}{#3}
+\stopsection
+}
+
+\def\subjectcomponents[#1]#2#3{%
+\startsubject[#1]
+\scomponents{#2}{#3}
+\stopsubject
+}
