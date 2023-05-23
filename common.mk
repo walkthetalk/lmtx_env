@@ -9,6 +9,9 @@
 ifeq ("${dir_main}", "")
 $(error "must assign `dir_main'")
 endif
+ifeq ("${output_dir}", "")
+output_dir := ${dir_main}/output
+endif
 ifeq ("${tex_path}","")
 tex_path:=${dir_main}/main.tex
 endif
@@ -38,7 +41,6 @@ ifeq ("${EXTRA_PATH}", "")
 EXTRA_PATH:=
 endif
 
-output_dir := ${dir_main}/output
 main_object := ${output_dir}/${pdf_name}.pdf
 
 __dir_env := $(dir $(lastword $(MAKEFILE_LIST)))
@@ -66,10 +68,10 @@ __paths_en_env := ${__dir_en_env}
 
 __tex_deps:=$(shell find ${__dir_env} \
 	-regextype posix-extended \
-	-regex ".*\.(tex|mp|bib|lua|mkiv|mkxl)")
+	-regex ".*\.(tex|mp|bib|lua|mkiv|mkxl|mklx)")
 __tex_deps+=$(shell find ${dir_main} \
 	-regextype posix-extended \
-	-regex ".*\.(tex|mp|bib|lua|mkiv|mkxl)")
+	-regex ".*\.(tex|mp|bib|lua|mkiv|mkxl|mklx)")
 
 # key0=value0,key1=value1,...
 __arguments := 
