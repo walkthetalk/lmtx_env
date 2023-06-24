@@ -3,9 +3,6 @@
 # 2. tex_path
 # 3. doc_env
 # 4. pdf_name
-# 5. LMTX_DIR
-# 6. FONT_DIR
-# 7. CONTEXT_BIN
 ifeq ("${dir_main}", "")
 $(error "must assign `dir_main'")
 endif
@@ -21,26 +18,24 @@ endif
 ifeq ("${pdf_name}","")
 pdf_name:=main
 endif
-ifeq ("${LMTX_DIR}", "")
-LMTX_DIR:=/usr/share/texmf-dist/texmf-context
+ifeq ("${TEXLIVE_DIR}","")
+TEXLIVE_DIR:="/mnt/datum/sw/texlive/2023"
 endif
-ifeq ("${FONT_DIR}", "")
-FONT_DIR_NOTO:=/usr/share/fonts/noto-cjk:/usr/share/fonts/noto
-FONT_DIR_ADOBE:=/usr/share/fonts/Adobe:/usr/share/fonts/adobe-source-code-pro
-FONT_DIR_TEXLIVE:=/usr/share/texmf-dist/fonts
-FONT_DIR:="${FONT_DIR_NOTO}:${FONT_DIR_ADOBE}:${FONT_DIR_TEXLIVE}"
-#$(error FONT_DIR is "${FONT_DIR}")
-endif
-ifeq ("${CONTEXT_BIN}", "")
-CONTEXT_BIN:=/usr/local/bin/context
-endif
-ifeq ("${MTXRUN_BIN}", "")
-MTXRUN_BIN:=/usr/local/bin/mtxrun
+ifeq ("${TEXLIVE_FONT_DIR}","")
+TEXLIVE_FONT_DIR:="/mnt/datum/iso/tex/fonts"
 endif
 ifeq ("${EXTRA_PATH}", "")
 EXTRA_PATH:=
 endif
 
+# self dir
+__common_mk_path := $(abspath $(lastword $(MAKEFILE_LIST)))
+__common_mk_dir := $(notdir $(patsubst %/,%,$(dir $(__common_mk_path))))
+__tl_script_path := ${__common_mk_dir}/set_texlive_env.sh
+
+CMD_SET_LMTX_ENV:=source ${__tl_script_path} ${TEXLIVE_DIR} ${TEXLIVE_FONT_DIR}
+
+# settings
 main_object := ${output_dir}/${pdf_name}.pdf
 
 __dir_env := $(dir $(lastword $(MAKEFILE_LIST)))
@@ -85,10 +80,9 @@ clean:
 
 ${main_object}: $(__tex_deps) | ${output_dir}/
 	echo [gen] $@; \
-	export TEXMF=${LMTX_DIR}; \
-	export OSFONTDIR=${FONT_DIR}; \
+	${CMD_SET_LMTX_ENV}; \
 	cd ${output_dir}; \
-	${CONTEXT_BIN} \
+	context \
 		--nocompression \
 		--environment=env_${doc_env} \
 		--path=${dir_main},${},${__paths_cn_env} \
@@ -98,13 +92,15 @@ ${main_object}: $(__tex_deps) | ${output_dir}/
 
 .PHONY: generate
 generate:
-	export TEXMF=${LMTX_DIR}; \
-	export OSFONTDIR=${FONT_DIR}; \
-	mtxrun --script fonts --reload; \
-	mtxrun --script font --list --all; \
-	${MTXRUN_BIN} --generate; \
-	${MTXRUN_BIN} --script font --reload --force; \
-	${MTXRUN_BIN} --script font --list --all
+	${CMD_SET_LMTX_ENV}; \
+	mtxrun --generate; \
+	mtxrun --script font --reload --force
+
+#	mtxrun --script fonts --reload; \
+#	mtxrun --script font --list --all; \
+#	mtxrun --generate; \
+#	mtxrun --script font --reload --force; \
+#	mtxrun --script font --list --all
 
 ${output_dir}/:
 	@mkdir -p $@
