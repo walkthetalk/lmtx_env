@@ -1,13 +1,11 @@
 
-\definemathcommand [lcm]     [limop] {\mfunction{lcm}}
-\definemathcommand [argmax]  [limop] {\mfunction{arg\,max}}
-\definemathcommand [argmin]  [limop] {\mfunction{arg\,min}}
-
-\definemathcommand [E]  [limop] {\mfunction{E}}
-\definemathcommand [Var]  [limop] {\mfunction{Var}}
-
-\definemathcommand [det]  [limop] {\mfunction{det}}
-\definemathcommand [rank]  [limop] {\mfunction{rank}}
+\definemathcommand[lcm]   [limop] {\mfunction{lcm}}
+\definemathcommand[argmax][limop] {\mfunction{arg\,max}}
+\definemathcommand[argmin][limop] {\mfunction{arg\,min}}
+\definemathcommand[E]     [limop] {\mfunction{E}}
+\definemathcommand[Var]   [limop] {\mfunction{Var}}
+\definemathcommand[det]   [limop] {\mfunction{det}}
+\definemathcommand[rank]  [limop] {\mfunction{rank}}
 
 \define[1]\ceil{{\left\lceil #1 \right\rceil}}
 \define[1]\floor{{\left\lfloor #1 \right\rfloor}}
@@ -19,6 +17,10 @@
   %textstyle=,
   %textcolor=,
 ]
+
+\define[1]\mathcomment{%
+\qquad\qquad\hfill\text{#1}%
+}
 
 \setupformulae[
   left={(},
