@@ -16,6 +16,11 @@ function commands.insamedir(url)
   tex.sprint(status.filename:match("^(.+/).+$")..url)
 end
 \stopluacode
+
+\define[1]\inputsamedir{%
+\input{\ctxlua{commands.insamedir([[#1]])}}%
+}
+
 \define[1]\scomponent{%
   \component[\ctxlua{commands.insamedir([[#1]])}]
 }
