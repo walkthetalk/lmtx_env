@@ -79,7 +79,7 @@ interfaces.implement {
     }
     if n > 30 then
       s="卅"..cap[n%10]
-    else if n == 30 then
+    elseif n == 30 then
       s="叁拾"
     elseif n > 20 then
       s="廿"..cap[n%10]
