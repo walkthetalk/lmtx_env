@@ -30,7 +30,7 @@ endif
 
 # self dir
 __common_mk_path := $(abspath $(lastword $(MAKEFILE_LIST)))
-__common_mk_dir := $(notdir $(patsubst %/,%,$(dir $(__common_mk_path))))
+__common_mk_dir := $(dir $(__common_mk_path))
 __tl_script_path := ${__common_mk_dir}/set_texlive_env.sh
 
 CMD_SET_LMTX_ENV:=source ${__tl_script_path} ${TEXLIVE_DIR} ${TEXLIVE_FONT_DIR}
