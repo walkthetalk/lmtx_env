@@ -1,0 +1,21 @@
+
+\registerctxluafile{t-pretty-console.lua}{0.9}
+
+\unprotect
+
+\definestartstop
+    [ConsoleSnippet]
+[
+  \c!color=red,
+  \c!style=\ttx,
+]
+
+\definetyping
+[console]
+[
+  \c!option=console,
+  \c!escape=no,
+  \c!tab=8,
+]
+
+\protect \endinput
