@@ -76,9 +76,9 @@ all: ${main_object}
 
 .PHONY: clean
 clean:
-	@rm -rf ${output_dir}/*
+	@rm -rf $(output_dir) $(clean_extra)
 
-${main_object}: $(__tex_deps) | ${output_dir}/
+${main_object}: $(tex_path) $(__tex_deps) | ${output_dir}/
 	echo [gen] $@; \
 	${CMD_SET_LMTX_ENV}; \
 	cd ${output_dir}; \
@@ -88,7 +88,7 @@ ${main_object}: $(__tex_deps) | ${output_dir}/
 		--path=${dir_main},${},${__paths_cn_env} \
 		--result=${pdf_name}.pdf \
 		--arguments=${__arguments} \
-		${tex_path}
+		$<
 
 .PHONY: generate
 generate:
