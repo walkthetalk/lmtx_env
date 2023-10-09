@@ -34,5 +34,4 @@ INFOPATH=${TL_MAIN_DIR}/texmf/doc/info:$INFOPATH; export INFOPATH
 # maybe the capital problem, context may ignored the 'Adobe',
 # so we should put all Adobe fonts in another directory, and
 # add it in the env var 'OSFONTDIR'.
-MYFONTDIR="`find "${TL_FONT_DIR}" -type d|tr '\n' ';'`"
-OSFONTDIR="${MYFONTDIR}:$OSFONTDIR"; export OSFONTDIR
+OSFONTDIR="${TL_FONT_DIR}:$OSFONTDIR"; export OSFONTDIR

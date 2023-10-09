@@ -19,14 +19,21 @@ ifeq ("${pdf_name}","")
 pdf_name:=main
 endif
 ifeq ("${TEXLIVE_DIR}","")
-TEXLIVE_DIR:="/mnt/datum/sw/texlive/2023"
+TEXLIVE_DIR:="/opt/texlive/2023"
 endif
 ifeq ("${TEXLIVE_FONT_DIR}","")
-TEXLIVE_FONT_DIR:="/mnt/datum/iso/tex/fonts"
+TEXLIVE_FONT_DIR := /mnt/datum/iso/tex/fonts
+# archlinux
+TEXLIVE_FONT_DIR := ${TEXLIVE_FONT_DIR}:/usr/share/fonts/noto-cjk:/usr/share/fonts/noto
+# ubuntu
+TEXLIVE_FONT_DIR := ${TEXLIVE_FONT_DIR}:/usr/share/fonts/opentype/noto
 endif
 ifeq ("${EXTRA_PATH}", "")
 EXTRA_PATH:=
 endif
+
+# NOTE: the default shell is dash on ubuntu
+SHELL := /usr/bin/env bash
 
 # self dir
 __common_mk_path := $(abspath $(lastword $(MAKEFILE_LIST)))
@@ -101,6 +108,11 @@ generate:
 #	mtxrun --generate; \
 #	mtxrun --script font --reload --force; \
 #	mtxrun --script font --list --all
+
+.PHONY: update
+update:
+	${CMD_SET_LMTX_ENV}; \
+	tlmgr --gui
 
 ${output_dir}/:
 	@mkdir -p $@
