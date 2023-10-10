@@ -1,0 +1,8 @@
+\definetyping[...]
+[
+  ...
+  \c!escape=no,
+  ...
+]
+
+其中的 'no' 将被当成转义符对待
