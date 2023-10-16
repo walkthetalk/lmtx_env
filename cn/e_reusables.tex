@@ -3,7 +3,13 @@
 
 \beginsinglepages[frontCover]
 \startmakeup[frontCover]
-  \externalfigure[图片1.png]
+\def\tryexternalfigure{\dotripleempty\dotryexternalfigure}
+\def\dotryexternalfigure[#1][#2][#3]{%
+  \iffirstargument%
+    \doifelsefigure{#1}{\externalfigure[#1][#2][#3]}{}%
+  \fi
+}
+  \tryexternalfigure[logo.png]
   \hfill
   \bTABLE
   \setupTABLE[frame=off,style=tblfont]
