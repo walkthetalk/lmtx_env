@@ -24,7 +24,7 @@ endif
 ifeq ("${TEXLIVE_FONT_DIR}","")
 TEXLIVE_FONT_DIR := /mnt/datum/iso/tex/fonts
 # archlinux
-TEXLIVE_FONT_DIR := ${TEXLIVE_FONT_DIR}:/usr/share/fonts/noto-cjk:/usr/share/fonts/noto
+TEXLIVE_FONT_DIR := ${TEXLIVE_FONT_DIR}:/usr/share/fonts/noto-cjk:/usr/share/fonts/noto:/usr/share/fonts/Adobe
 # ubuntu
 TEXLIVE_FONT_DIR := ${TEXLIVE_FONT_DIR}:/usr/share/fonts/opentype/noto
 endif
@@ -103,11 +103,10 @@ generate:
 	mtxrun --generate; \
 	mtxrun --script font --reload --force
 
-#	mtxrun --script fonts --reload; \
-#	mtxrun --script font --list --all; \
-#	mtxrun --generate; \
-#	mtxrun --script font --reload --force; \
-#	mtxrun --script font --list --all
+.PHONY: listfonts
+listfonts:
+	${CMD_SET_LMTX_ENV}; \
+	mtxrun --script font --list --all
 
 .PHONY: update
 update:
