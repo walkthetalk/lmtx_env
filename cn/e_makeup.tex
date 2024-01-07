@@ -1,12 +1,43 @@
 
-\definelayout[frontCover]
+\definelayout[frontCover][%
+  % vertical
+    top=0mm,
+    topdistance=0mm,
+      header=0mm,
+        headerdistance=0mm,
+        footerdistance=0mm,
+      footer=0mm,
+    bottomdistance=0mm,
+    bottom=0mm,
+  height=fit,
+  % horizontal
+    leftedge=0mm,
+      leftedgedistance=0mm,
+        leftmargin=0mm,
+          leftmargindistance=0mm,
+          rightmargindistance=0mm,
+        rightmargin=0mm,
+      rightedgedistance=0mm,
+    rightedge=0mm,
+  width=fit,
+  % auto calc
+  topspace=0mm,
+  bottomspace=0mm,
+  backspace=0mm,
+  cutspace=0mm,
+  % misc
+  location=middle,
+  marking=on,
+]
 \definemakeup[frontCover][
   page={yes,right},
   doublesided=no,
   headerstate=none,
   footerstate=none,
+  topstate=empty,
+  bottomstate=empty,
   pagestate=stop,
   % 抄自makeup[text]，占满整个页面
-  top=\pseudostrut\ignorespaces,
+  %top=\pseudostrut\ignorespaces,
   %bottom=\obeydepth\vss
 ]
