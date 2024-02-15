@@ -22,7 +22,7 @@ ifeq ("${TEXLIVE_DIR}","")
 TEXLIVE_DIR:="/opt/texlive/2023"
 endif
 ifeq ("${TEXLIVE_FONT_DIR}","")
-TEXLIVE_FONT_DIR := /mnt/datum/iso/tex/fonts
+TEXLIVE_FONT_DIR := /opt/texlive/fonts
 # archlinux
 TEXLIVE_FONT_DIR := ${TEXLIVE_FONT_DIR}:/usr/share/fonts/noto-cjk:/usr/share/fonts/noto:/usr/share/fonts/Adobe
 # ubuntu
