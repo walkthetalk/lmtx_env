@@ -1,0 +1,170 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% body part %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\startsectionblockenvironment[bodypart]
+% \note workaround for get total chapter number
+\determinelistcharacteristics
+   [chapter]
+   [criterium=all]
+%\utilitylistlength
+
+\definelayer[specificlayer][preset=middle]
+\startsetups rightlayer
+\doiftextelse{\headnumber[chapter]}{
+  \determineheadnumber[chapter]% @note: 对于\currentheadnumber, 不能用\headnumber[]进行计算
+  \doifnot{\utilitylistlength}{0}{% @note: 運行過程中可能是 0
+    \setlayerframed[specificlayer][
+      x={\paperwidth-\layerwidth},
+      y={\paperheight/\utilitylistlength*(2*\currentheadnumber-1)/2}, % \note: 表達式不支持小數
+      frame=off,
+      background=color,
+      backgroundcolor=black,
+      foregroundcolor=white,
+      backgroundoffset=.2em,
+      location={lohi,middle},
+      offset=none]{%
+      \labelinmargin\headnumber[chapter]%
+    }
+  }
+}{}
+\stopsetups
+\startsetups leftlayer
+\doiftextelse{\headnumber[chapter]}{
+  \determineheadnumber[chapter]% @note: 对于\currentheadnumber, 不能用\headnumber[]进行计算
+  \doifnot{\utilitylistlength}{0}{% \note: 運行過程中可能是 0
+    \setlayerframed[specificlayer][
+      x=0pt,
+      y={\paperheight-\paperheight/\utilitylistlength*(2*\currentheadnumber-1)/2}, % \note: 表達式不支持小數
+      frame=off,
+      background=color,
+      backgroundcolor=black,
+      foregroundcolor=white,
+      backgroundoffset=.2em,
+      location={lohi,middle},
+      offset=none]{%
+      \labelinmargin\headnumber[chapter]%
+    }
+  }
+}{}
+\stopsetups
+\setupbackgrounds[rightpage][setups=rightlayer,background=specificlayer]
+\setupbackgrounds[leftpage][setups=rightlayer,background=specificlayer]
+
+\resetpagenumber
+%\setupheader[state=none]
+\define\BodyTextLeftHeader{%
+% @note location=low 保证坐在第一行上
+\framedtext[frame=off,bottomframe=on,width=broad,offset=none,frameoffset=0pt,location=low]{%
+  \doiftextelse{\getmarking[chapter][first]}%
+  {\labeltexts{bodychapter}{\getmarking[chapternumber][first]}\;\;\getmarking[chapter][first]}%
+  {}
+  \hfill
+}%
+}
+% \note 不要使用 \getnumber，使用 \getmarking
+% \todo 不知如何判斷是處在 section 中，還是處在 subject 中
+\define\BodyTextRightHeader{%
+% @note location=low 保证坐在第一行上
+\framedtext[frame=off,bottomframe=on,width=broad,offset=none,frameoffset=0pt,location=low]{%
+  \hfill
+    \doiftextelse{\getmarking[section][first]}%
+    {\labeltexts{bodysection}{\getmarking[sectionnumber][first]}\;\;\getmarking[section][first]}%
+    {}%
+}%
+}
+% @note 保证header底部对齐
+\setupheader[text][before={\vskip\dimexpr(\headerheight-\lineheight)}]
+
+\setupheadertexts[text]
+[]
+[\BodyTextRightHeader]
+[]
+[\BodyTextRightHeader]
+
+\define\BodyTextLeftFooter{%
+\framedtext[frame=off,topframe=on,width=broad,
+  offset=none,frameoffset=0pt,
+  location=high,
+  style=footertext]{%
+\rlap{第\;\pagenumber\;页} \hfill {共\;\lastpagenumber\;页} \hfill \llap{}%
+}}%
+\define\BodyTextRightFooter{%
+\framedtext[frame=off,topframe=on,width=broad,
+  offset=none,frameoffset=0pt,
+  location=high,
+  style=footertext]{%
+\rlap{} \hfill {共\;\lastpagenumber\;页} \hfill \llap{第\;\pagenumber\;页}%
+}}%
+
+\setupfootertexts[text]
+[]
+[\BodyTextRightFooter]
+[]
+[\BodyTextRightFooter]
+
+\define\BodyEdgeLeftFooter{%
+\framed[frame=off]{% @note avoid wrong footer height for rotation
+  \rotate[%
+    rotation=-90,
+    width=fit,
+    height=fit,
+    frame=off,
+    offset=2pt,
+    background=color,
+    backgroundcolor=darkgray,
+    foregroundcolor=white,
+    corner=round,
+  ]{\getvariable{documentproperty}{title} —— \from[authoremail]}
+}
+}
+\define\BodyEdgeRightFooter{%
+\framed[frame=off]{% @note avoid wrong footer height for rotation
+  \rotate[%
+    rotation=90,
+    width=fit,
+    height=fit,
+    frame=off,
+    offset=2pt,
+    background=color,
+    backgroundcolor=darkgray,
+    foregroundcolor=white,
+    corner=round,
+  ]{\getvariable{documentproperty}{title} —— \from[authorblog]}
+}
+}
+
+\setupfootertexts[edge]
+[]
+[]
+[]
+[]
+\stopsectionblockenvironment
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% front part %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\startsectionblockenvironment[frontpart]
+\resetpagenumber
+
+\setupfootertexts[text]
+[]
+[pagenumber]
+[pagenumber]
+[]
+
+\stopsectionblockenvironment
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% appendix part %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\startsectionblockenvironment[appendix]
+\setupfootertexts[text]
+[]
+[pagenumber]
+[pagenumber]
+[]
+
+% \todo just workaround, front/body/appendix/back, the part number will reset internally
+\setuphead[part][%
+  number=no,
+]
+\stopsectionblockenvironment
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% back part %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\startsectionblockenvironment[backpart]
+\resetpagenumber
+\stopsectionblockenvironment

@@ -1,0 +1,54 @@
+\setuppapersize[A4][A4]
+\definepapersize[landscapePage][A4,landscape]
+
+\setuppagenumbering[
+  state=start,
+  way=bytext,
+  alternative=singlesided,
+  location=,%header,
+  %left=the,
+  %right=ok,
+]
+% don't use TAB, and no space between *reg=val*, and no empty line,
+% or it will be ommitted
+\setuplayout[
+  % vertical
+    top=10mm,
+    topdistance=2mm,
+      header=7mm,
+        headerdistance=2mm,
+        footerdistance=2mm,
+      footer=7mm,
+    bottomdistance=2mm,
+    bottom=10mm,
+  height=fit,
+  % horizontal
+    leftedge=10mm,
+      leftedgedistance=2mm,
+        leftmargin=20mm,
+          leftmargindistance=2mm,
+          rightmargindistance=2mm,
+        rightmargin=20mm,
+      rightedgedistance=2mm,
+    rightedge=10mm,
+  width=fit,
+  % misc
+  location=middle,
+  marking=on
+]
+\setuplayout[
+  topspace=\dimexpr(\topheight + \topdistance),
+  bottomspace=\dimexpr(\bottomheight + \bottomdistance),
+  backspace=\dimexpr(\leftedgewidth + \leftedgedistance + \leftmarginwidth + \leftmargindistance + 5mm),
+  cutspace=\dimexpr(\rightedgewidth + \rightedgedistance + \rightmarginwidth + \rightmargindistance),
+]
+
+% set the background clors
+% NOTE: it is confilict with \show frame
+\if 0
+\setupbackgrounds[page][background=color,backgroundcolor=gray:1]
+\setupbackgrounds[top, bottom][background=color,backgroundcolor=gray:1]
+\setupbackgrounds[header][background=color,backgroundcolor=darkyellow]
+\setupbackgrounds[footer][background=color,backgroundcolor=darkyellow]
+\setupbackgrounds[text][leftedge,leftmargin,text,rightmargin,rightedge][background=color,backgroundcolor=white]
+\fi
