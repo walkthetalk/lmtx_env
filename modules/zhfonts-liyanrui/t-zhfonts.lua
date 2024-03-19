@@ -137,8 +137,10 @@ function zhfonts.setup(metainfo, fontinfo)
 end
 
 function zhfonts.main(param)
-    zhspuncs.opt()
     local arg_list = string_split_and_strip(param, ",")
+    if arg_list[3] == "true" then
+    	zhspuncs.opt()
+    end
     if arg_list[1] ~= "none" and arg_list[2] ~= "none" then
         zhfonts.gen_typescript()
         context("\\getbuffer[zhfonts:typescript]")

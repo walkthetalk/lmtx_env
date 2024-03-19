@@ -12,10 +12,11 @@
 \writestatus{loading}{ConTeXt User Module / zhfonts}
 \startmodule[zhfonts]
 \unprotect
-\setupmodule[family=rm,size=11pt]
+\setupmodule[family=rm,size=11pt,puncs=true]
 \ctxloadluafile{t-zhfonts}
 \edef\@@@@??family{\currentmoduleparameter{family}}
 \edef\@@@@??size{\currentmoduleparameter{size}}
+\edef\@@@@??puncs{\currentmoduleparameter{puncs}}
 
 \def\setupzhfonts{\dodoubleempty\dosetupzhfonts}
 \def\dosetupzhfonts[#1][#2]{%
@@ -25,7 +26,7 @@
 \def\showzhfonts{\typebuffer[zhfonts:typescript][option=TeX]}
 
 % 使得 zhfonts 默认字体设置生效
-\prependtoks\zhfonts[\@@@@??family,\@@@@??size]\to\everystarttext
+\prependtoks\zhfonts[\@@@@??family,\@@@@??size,\@@@@??puncs]\to\everystarttext
 \protect
 \stopmodule
 \endinput
