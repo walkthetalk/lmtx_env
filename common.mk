@@ -57,8 +57,7 @@ __dir_zhfonts-liyanrui := ${__dir_env}/modules/zhfonts-liyanrui
 
 __dir_metapost := ${__dir_env}/metapost
 __dirs_metapost_modules := ${__dir_metapost}/metauml
-#__dir_zh_modules := ${__dir_jiazhu},${__dir_vertical-typesetting},${__dir_zhfonts},${__dir_zhpunc}
-__dir_zh_modules := ${__dir_zhfonts-liyanrui}
+__dir_zh_modules := ${__dir_jiazhu},${__dir_vertical-typesetting},${__dir_zhfonts},${__dir_zhpunc}
 
 __dir_figs := ${dir_main}/figs
 
