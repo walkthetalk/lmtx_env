@@ -21,22 +21,26 @@
     rightedge=0mm,
   width=fit,
   % auto calc
-  topspace=0mm,
-  bottomspace=0mm,
-  backspace=0mm,
-  cutspace=0mm,
+  topspace=20mm,
+  bottomspace=20mm,
+  backspace=20mm,
+  cutspace=20mm,
   % misc
   location=middle,
   marking=on,
 ]
 \definemakeup[frontCover][
-  page={yes,right},
-  doublesided=no,
-  headerstate=none,
-  footerstate=none,
-  topstate=empty,
-  bottomstate=empty,
-  pagestate=stop,
+  %page={yes,right},
+  %doublesided=empty,
+  %pagestate=stop,
+  %headerstate=stop,
+  %footerstate=stop,
+  %topstate=normal,
+  %bottomstate=normal,
+  %top=\vskip10mm,
+  %bottom=\vskip10mm,
+  %left=\hskip10mm,
+  %right=\hskip10mm,
   % 抄自makeup[text]，占满整个页面
   %top=\pseudostrut\ignorespaces,
   %bottom=\obeydepth\vss
