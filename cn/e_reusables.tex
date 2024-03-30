@@ -28,17 +28,29 @@
   \stopalignment
 
   \vfill
-  \startalignment[middle]
-  \bTABLE
-  \setupTABLE[frame=off,style=tblfontVerybig,toffset=2em]
-  \setupTABLE[column][1][align=flushright]
-  \setupTABLE[column][3][bottomframe=on,width=12em]
-  \bTR\bTD 编制 \eTD\bTD ： \eTD\bTD \eTD\eTR
-  \bTR\bTD 审核 \eTD\bTD ： \eTD\bTD \eTD\eTR
-  \bTR\bTD 批准 \eTD\bTD ： \eTD\bTD \eTD\eTR
-  \bTR\bTD 生效日期 \eTD\bTD ： \eTD\bTD \eTD\eTR
-  \eTABLE
-  \stopalignment
+  % @note startalignemnt 不管用
+  \startlinealignment[middle]
+  \startxtable[frame=off, toffset=2em, foregroundstyle=tblfontVerybig]
+    \startxcolumn
+      \startxcell 编 \hfill 制 \stopxcell
+      \startxcell 审 \hfill 核 \stopxcell
+      \startxcell 批 \hfill 准 \stopxcell
+      \startxcell 生效日期 \stopxcell
+    \stopxcolumn
+    \startxcolumn
+      \startxcell ： \stopxcell
+      \startxcell ： \stopxcell
+      \startxcell ： \stopxcell
+      \startxcell ： \stopxcell
+    \stopxcolumn
+    \startxcolumn[bottomframe=on,width=12em]
+      \startxcell \stopxcell
+      \startxcell \stopxcell
+      \startxcell \stopxcell
+      \startxcell \stopxcell
+    \stopxcolumn
+  \stopxtable
+  \stoplinealignment
 
   \vfill
   \startalignment[middle]
