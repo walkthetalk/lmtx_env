@@ -1,17 +1,17 @@
-%\setuppapersize[A4,landscape,rotated,270][A4,portrait]
-\setuppapersize[A5,landscape]%[A4,landscape]
-%\setuparranging[3SIDE]
+\setuppapersize[A4,landscape,rotated,270][A4]
 
+% @brief 使用独立layout设定 even/odd，doublesided 与 竖排 不兼容。
+%        也可以是使用 left/right 设置 layout
 \setuppagenumbering[
   state=start,
   way=bytext,
-  alternative=doublesided,
-  location=,%header,
-  %left=the,
-  %right=ok,
+  location=none,%header,
+  %alternative=doublesided,
+  %left=\switchToLeftLayout,
+  %right=\switchToRightLayout,
 ]
-% don't use TAB, and no space between *reg=val*, and no empty line,
-% or it will be ommitted
+
+% @brief 全局 layout
 \setuplayout[
   % vertical
     top=10mm,
@@ -33,15 +33,22 @@
       rightedgedistance=2mm,
     rightedge=10mm,
   width=fit,
-  % misc
-  location=middle,
-  marking=on
+  %location=middle,
+  %marking=on
 ]
 \setuplayout[
   topspace=\dimexpr(\topheight + \topdistance),
   bottomspace=\dimexpr(\bottomheight + \bottomdistance),
-  backspace=\dimexpr(\leftedgewidth + \leftedgedistance + \leftmarginwidth + \leftmargindistance + 5mm),
+  backspace=\dimexpr(\leftedgewidth + \leftedgedistance + \leftmarginwidth + \leftmargindistance),
   cutspace=\dimexpr(\rightedgewidth + \rightedgedistance + \rightmarginwidth + \rightmargindistance),
+]
+
+% @brief 偶数页、奇数页不同布局设定
+\definelayout[even][
+  bottomspace=\dimexpr(\bottomheight + \bottomdistance + 10mm)
+]
+\definelayout[odd][
+  topspace=\dimexpr(\topheight + \topdistance + 10mm)
 ]
 
 % set the background clors
