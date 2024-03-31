@@ -1,4 +1,6 @@
-\setuppapersize[A4,landscape,rotated,270][A4]
+\definepapersize[gujipaper][A4]
+% @brief 必须先设定 papersize, 才能确定页面大小，然后再分左右页调整旋转方向时才不会导致文字超出页面
+\setuppapersize[A4,landscape,rotated][A4]
 
 % @brief 使用独立layout设定 even/odd，doublesided 与 竖排 不兼容。
 %        也可以是使用 left/right 设置 layout
@@ -6,12 +8,13 @@
   state=start,
   way=bytext,
   location=none,%header,
-  %alternative=doublesided,
-  %left=\switchToLeftLayout,
-  %right=\switchToRightLayout,
+  % @brief 要想使用 \setbackgrounds[leftpage]，必须使用 doublesided
+  alternative=doublesided,
 ]
 
-% @brief 全局 layout
+\startsetups rightPageSetup
+% @brief 强行旋转，针对竖排
+\setuppapersize[A4,landscape,270][A4]
 \setuplayout[
   % vertical
     top=10mm,
@@ -33,23 +36,46 @@
       rightedgedistance=2mm,
     rightedge=10mm,
   width=fit,
-  %location=middle,
-  %marking=on
+  topspace=12mm,
+  bottomspace=32mm,
+  backspace=34mm,
+  cutspace=34mm,
 ]
-\setuplayout[
-  topspace=\dimexpr(\topheight + \topdistance),
-  bottomspace=\dimexpr(\bottomheight + \bottomdistance),
-  backspace=\dimexpr(\leftedgewidth + \leftedgedistance + \leftmarginwidth + \leftmargindistance),
-  cutspace=\dimexpr(\rightedgewidth + \rightedgedistance + \rightmarginwidth + \rightmargindistance),
-]
+\stopsetups
 
-% @brief 偶数页、奇数页不同布局设定
-\definelayout[even][
-  bottomspace=\dimexpr(\bottomheight + \bottomdistance + 10mm)
+\startsetups leftPageSetup
+% @brief 强行旋转，针对竖排
+\setuppapersize[A4,landscape,90][A4]
+\setuplayout[
+  % vertical
+    top=10mm,
+    topdistance=2mm,
+      header=7mm,
+        headerdistance=2mm,
+        footerdistance=2mm,
+      footer=7mm,
+    bottomdistance=2mm,
+    bottom=10mm,
+  height=fit,
+  % horizontal
+    leftedge=10mm,
+      leftedgedistance=2mm,
+        leftmargin=20mm,
+          leftmargindistance=2mm,
+          rightmargindistance=2mm,
+        rightmargin=20mm,
+      rightedgedistance=2mm,
+    rightedge=10mm,
+  width=fit,
+  topspace=32mm,
+  bottomspace=12mm,
+  backspace=34mm,
+  cutspace=34mm,
 ]
-\definelayout[odd][
-  topspace=\dimexpr(\topheight + \topdistance + 10mm)
-]
+\stopsetups
+
+\setupbackgrounds[rightpage][setups=rightPageSetup]
+\setupbackgrounds[leftpage][setups=leftPageSetup]
 
 % set the background clors
 % NOTE: it is confilict with \show frame
