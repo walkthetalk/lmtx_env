@@ -19,7 +19,7 @@ ifeq ("${pdf_name}","")
 pdf_name:=main
 endif
 ifeq ("${TEXLIVE_DIR}","")
-TEXLIVE_DIR:="/opt/texlive/2023"
+TEXLIVE_DIR:="/opt/texlive/2024"
 endif
 ifeq ("${TEXLIVE_FONT_DIR}","")
 TEXLIVE_FONT_DIR := /opt/texlive/fonts
@@ -76,6 +76,23 @@ __tex_deps+=$(shell find ${dir_main} \
 
 # key0=value0,key1=value1,...
 __arguments := 
+
+define define_object =
+.PHONY: $1
+$1: $${output_dir}/$1.pdf
+
+$${output_dir}/$1.pdf: $${dir_main}/$2 | $${output_dir}/
+	echo [gen] $$@; \
+	$${CMD_SET_LMTX_ENV}; \
+	cd $${output_dir}; \
+	context \
+		--nocompression \
+		--environment=env_$${doc_env} \
+		--path=$${dir_main},$${},$${__paths_cn_env} \
+		--result=$1.pdf \
+		--arguments=$${__arguments} \
+		$$<
+endef
 
 .PHONY: all
 all: ${main_object}
